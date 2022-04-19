@@ -8,18 +8,26 @@ let render = Matter.Render.create({
     engine: engine,
     options: {
         background: '#fafafa',
-        wireframes: false,
-        showMousePosition: false
+        wireframes: false
     }
 })
 
 // create two boxes and a ground
+let ground = Matter.Bodies.rectangle(400, 610, 810, 60, { isStatic: true })
 let boxA = Matter.Bodies.rectangle(400, 200, 80, 80)
 let boxB = Matter.Bodies.rectangle(450, 50, 80, 80)
-let ground = Matter.Bodies.rectangle(400, 610, 810, 60, { isStatic: true })
+
+let mouse = Matter.Mouse.create(render.canvas)
+let mouseConstraint = Matter.MouseConstraint.create(engine, {
+    mouse: mouse,
+    constraint: {
+        render: { visible: false }
+    }
+})
+
 
 // add all of the bodies to the world
-Matter.Composite.add(engine.world, [boxA, boxB, ground])
+Matter.Composite.add(engine.world, [boxA, boxB, ground, mouseConstraint])
 
 // run the renderer
 Matter.Render.run(render)
