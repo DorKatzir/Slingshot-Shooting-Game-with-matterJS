@@ -29,6 +29,9 @@ let mouseConstraint = Matter.MouseConstraint.create(engine, {
 // add all of the bodies to the world
 Matter.Composite.add(engine.world, [boxA, boxB, ground, mouseConstraint])
 
+ // keep the mouse in sync with rendering
+render.mouse = mouse;
+
 // run the renderer
 Matter.Render.run(render)
 
